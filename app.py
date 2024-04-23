@@ -7,15 +7,19 @@ planilha = pd.read_excel('Controle Ordens de Serviço ADM.xlsx', sheet_name='Ord
 planilha = planilha.copy()
 st.write(planilha)
 
-temp_file_name = tempfile.NamedTemporaryFile(delete=False, suffix='.xlsx').name
-planilha.to_excel(temp_file_name, index=False)
+def download_planilha():
+    temp_file_name = 'planilha.xlsx'
+    planilha.to_excel(temp_file_name, index=False)
+    with open(temp_file_name, 'rb') as f:
+        bytes_data = f.read()
+    st.download_button(
+        label="Download da Planilha",
+        data=bytes_data,
+        file_name=temp_file_name,
+        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
 
-st.download_button(
-    label="Download da Planilha",
-    data=temp_file_name,
-    file_name='planilha.xlsx',
-    mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-)
+download_planilha()
 
 lista_depto = sorted(planilha['DEPTO'].astype(str).unique().tolist())
 lista_depto = ['GERAIS'] + lista_depto
