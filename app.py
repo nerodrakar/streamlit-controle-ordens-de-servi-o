@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import tempfile
 
-planilha = pd.read_excel('Controle Ordens de Serviço ADM.xlsx', sheet_name='Ordens de Serviço - 2024', usecols='A:O', parse_dates=['DATA E HORA SOLICITAÇÃO', 'DATA E HORA DA EXECUÇÃO'], dtype={'DATA E HORA SOLICITAÇÃO': str, 'DATA E HORA DA EXECUÇÃO': str})
+planilha = pd.read_excel('Controle Ordens de Serviço ADM.xlsx', sheet_name='Ordens de Serviço - 2024', usecols='A:O')
 planilha = planilha.copy()
 st.write(planilha)
 
